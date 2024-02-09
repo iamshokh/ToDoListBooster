@@ -7,9 +7,11 @@ namespace ToDoListBooster.DataLayer.EfClasses
     [Table("sys_user")]
     public partial class User
     {
-        public User()
+        public User(string? password)
         {
             TaskLists = new HashSet<TaskList>();
+            if(!string.IsNullOrEmpty(password))
+                SetPassword(password);
         }
 
         [Key]

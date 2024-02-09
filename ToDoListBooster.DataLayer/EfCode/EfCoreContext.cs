@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDoListBooster.DataLayer.EfClasses;
 
 namespace ToDoListBooster.DataLayer.EfCode
 {
@@ -9,5 +10,10 @@ namespace ToDoListBooster.DataLayer.EfCode
         {
 
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<TaskList> TaskLists { get; set; }
+        public DbSet<TaskItem> TaskItems { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

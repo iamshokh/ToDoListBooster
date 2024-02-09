@@ -1,4 +1,5 @@
 ﻿using ToDoListBooster.Core.Configurations;
+using ToDoListBooster.Core.Security;
 
 namespace ToDoListBooster.WebApi
 {
