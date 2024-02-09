@@ -1,6 +1,6 @@
 ﻿using ToDoListBooster.WebApi;
 
-namespace E_Wallet.WebApi.Extensions
+namespace ToDoListBooster.WebApi.Extensions
 {
     public static class ConfigServiceExtentions
     {
@@ -8,7 +8,7 @@ namespace E_Wallet.WebApi.Extensions
         {
             services.AddSingleton(AppSettings.Instance.Database);
             services.AddSingleton(AppSettings.Instance.Jwt);
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

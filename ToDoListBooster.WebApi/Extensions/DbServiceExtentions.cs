@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoListBooster.DataLayer.EfCode;
+using ToDoListBooster.DataLayer.PgSql.EfCode;
 
-namespace E_Wallet.WebApi.Extensions
+namespace ToDoListBooster.WebApi.Extensions
 {
     public static class DbServiceExtentions
     {

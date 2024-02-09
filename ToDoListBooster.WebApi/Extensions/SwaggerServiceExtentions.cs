@@ -1,8 +1,8 @@
-using E_Wallet.Core.Attributes;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using ToDoListBooster.Core.Attributes;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
