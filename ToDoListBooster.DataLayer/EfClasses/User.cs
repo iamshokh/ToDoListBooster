@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ToDoListBooster.Core.Security;
 
 namespace ToDoListBooster.DataLayer.EfClasses
 {
@@ -31,5 +32,21 @@ namespace ToDoListBooster.DataLayer.EfClasses
 
         [InverseProperty(nameof(TaskList.User))]
         public virtual ICollection<TaskList> TaskLists { get; set; }
+
+        public bool IsValidPassword(string password)
+        {
+            return !(string.IsNullOrEmpty(password) || PasswordHasher.GenerateHash(password, PasswordSalt) != PasswordHash);
+        }
+        public void SetPassword(string password, bool isNewEntity = false)
+        {
+            if (isNewEntity && string.IsNullOrEmpty(password))
+                throw new ArgumentException("Пароль требуется для нового пользователя", nameof(password));
+
+            if (isNewEntity || !string.IsNullOrEmpty(password))
+            {
+                PasswordSalt = PasswordHasher.GenerateSalt();
+                PasswordHash = PasswordHasher.GenerateHash(password, PasswordSalt);
+            }
+        }
     }
 }
