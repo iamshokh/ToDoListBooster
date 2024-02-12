@@ -11,9 +11,9 @@ namespace ToDoListBooster.BizLogicLayer.TaskListService
 {
     public interface ITaskListService : IStatusGeneric
     {
-        public List<TaskList> GetAll(SortFilterDto dto);
-        public void Create(CreateTaskListDto dto);
-        public void Update(UpdateTaskListDto dto);
-        public void Delete(int id);
+        List<TaskList> GetAll(SortFilterDto dto);
+        void Create(CreateTaskListDto dto);
+        void Update(UpdateTaskListDto dto);
+        void Delete(int id);
     }
 }
