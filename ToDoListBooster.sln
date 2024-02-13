@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.WebApi", "ToDoListBooster.WebApi\ToDoListBooster.WebApi.csproj", "{F7DC8CAE-F2AA-46F1-96A7-E218A121AE5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListBooster.WebApi", "ToDoListBooster.WebApi\ToDoListBooster.WebApi.csproj", "{F7DC8CAE-F2AA-46F1-96A7-E218A121AE5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.DataLayer", "ToDoListBooster.DataLayer\ToDoListBooster.DataLayer.csproj", "{057C797F-7501-4F84-A062-379E913B1FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListBooster.DataLayer", "ToDoListBooster.DataLayer\ToDoListBooster.DataLayer.csproj", "{057C797F-7501-4F84-A062-379E913B1FE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.DataLayer.PgSql", "ToDoListBooster.DataLayer.PgSql\ToDoListBooster.DataLayer.PgSql.csproj", "{BA4CB523-9EF3-42E1-9BA5-A3C014ECE702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListBooster.DataLayer.PgSql", "ToDoListBooster.DataLayer.PgSql\ToDoListBooster.DataLayer.PgSql.csproj", "{BA4CB523-9EF3-42E1-9BA5-A3C014ECE702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.BizLogicLayer", "ToDoListBooster.BizLogicLayer\ToDoListBooster.BizLogicLayer.csproj", "{1E297EAF-81E6-4E56-9A8A-F6ECB718C29E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListBooster.BizLogicLayer", "ToDoListBooster.BizLogicLayer\ToDoListBooster.BizLogicLayer.csproj", "{1E297EAF-81E6-4E56-9A8A-F6ECB718C29E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.Core", "ToDoListBooster.Core\ToDoListBooster.Core.csproj", "{479BD161-89D8-4CFF-A081-DD1FC577B3B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListBooster.Core", "ToDoListBooster.Core\ToDoListBooster.Core.csproj", "{479BD161-89D8-4CFF-A081-DD1FC577B3B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListBooster.xUnitTests", "ToDoListBooster.xUnitTests\ToDoListBooster.xUnitTests.csproj", "{79E01107-B8F6-42A0-9145-BA104628314F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{479BD161-89D8-4CFF-A081-DD1FC577B3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{479BD161-89D8-4CFF-A081-DD1FC577B3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{479BD161-89D8-4CFF-A081-DD1FC577B3B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E01107-B8F6-42A0-9145-BA104628314F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E01107-B8F6-42A0-9145-BA104628314F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E01107-B8F6-42A0-9145-BA104628314F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E01107-B8F6-42A0-9145-BA104628314F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

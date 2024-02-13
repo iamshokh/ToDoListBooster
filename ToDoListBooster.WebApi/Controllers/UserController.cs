@@ -10,13 +10,13 @@ using ToDoListBooster.DataLayer.EfCode;
 
 namespace ToDoListBooster.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public UserController(IMediator mediator, EfCoreContext context)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }

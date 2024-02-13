@@ -16,21 +16,6 @@ namespace ToDoListBooster.WebApi.Controllers
         {
             _mediator = mediator;
         }
-        /// <summary>
-        /// Регистрация нового пользователя.
-        /// </summary>
-        /// <remarks>
-        /// Пример запроса:
-        ///
-        ///     POST /Account/Registration
-        ///     {
-        ///         "email": "example@example.com",
-        ///         "password": "password123"
-        ///     }
-        ///
-        /// </remarks>
-        /// <param name="command">Данные для регистрации пользователя.</param>
-        /// <returns>Идентификатор зарегистрированного пользователя.</returns>
         [HttpPost]
         public async Task<IActionResult> Registration(RegistrationCommand command)
         {

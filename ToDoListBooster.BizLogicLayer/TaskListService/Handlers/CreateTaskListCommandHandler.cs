@@ -26,7 +26,7 @@ namespace ToDoListBooster.BizLogicLayer.TaskListService
                 {
                     Title = request.Title,
                     Descrition = request.Descrition,
-                    UserId = request.UserId
+                    UserId = request.UserId,
                 };
                 await _context.TaskLists.AddAsync(newTaskList);
                 await _context.SaveChangesAsync();
