@@ -15,7 +15,7 @@ namespace ToDoListBooster.DataLayer.EfClasses
         [Column("task_item_id")]
         public int TaskItemId { get; set; }
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(TaskItemId))]
         [InverseProperty(nameof(EfClasses.TaskItem.Comments))]

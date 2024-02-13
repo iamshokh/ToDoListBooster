@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Builder
             if (AppSettings.Instance.Swagger.Enabled)
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "E_Wallet.WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDoList.WebApi v1"));
             }
         }
     }

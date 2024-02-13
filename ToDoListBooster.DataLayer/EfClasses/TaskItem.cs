@@ -25,7 +25,7 @@ namespace ToDoListBooster.DataLayer.EfClasses
         [Column("status_id")]
         public int StatusId { get; set; }
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(StatusId))]
         [InverseProperty(nameof(EfClasses.Status.TaskItems))]

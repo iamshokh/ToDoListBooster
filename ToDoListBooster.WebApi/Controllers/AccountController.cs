@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ToDoListBooster.BizLogicLayer.AccountService;
+using ToDoListBooster.BizLogicLayer.ComentService;
 
 namespace ToDoListBooster.WebApi.Controllers
 {
@@ -8,38 +11,38 @@ namespace ToDoListBooster.WebApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAccountService _service;
-        public AccountController(IAccountService service)
+        private readonly IMediator _mediator;
+        public AccountController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
+        }
+        /// <summary>
+        /// Регистрация нового пользователя.
+        /// </summary>
+        /// <remarks>
+        /// Пример запроса:
+        ///
+        ///     POST /Account/Registration
+        ///     {
+        ///         "email": "example@example.com",
+        ///         "password": "password123"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="command">Данные для регистрации пользователя.</param>
+        /// <returns>Идентификатор зарегистрированного пользователя.</returns>
+        [HttpPost]
+        public async Task<IActionResult> Registration(RegistrationCommand command)
+        {
+            var userId = await _mediator.Send(command);
+            return Ok(userId);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registration([FromBody] RegistrateDto dto)
+        public async Task<IActionResult> Login(LoginCommand command)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _service.Regester(dto);
-
-                if (_service.IsValid)
-                    return Ok(result);
-            }
-
-            return ValidationProblem(ModelState);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginDto dto)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _service.Login(dto);
-
-                if (_service.IsValid)
-                    return Ok(result);
-            }
-
-            return ValidationProblem(ModelState);
+            var user = await _mediator.Send(command);
+            return Ok(user);
         }
     }
 }

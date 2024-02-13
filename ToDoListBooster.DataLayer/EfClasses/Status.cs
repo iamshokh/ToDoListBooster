@@ -24,7 +24,7 @@ namespace ToDoListBooster.DataLayer.EfClasses
         [StringLength(300)]
         public string FullName { get; set; } = null!;
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [InverseProperty(nameof(TaskItem.Status))]
         public virtual ICollection<TaskItem> TaskItems { get; set; }

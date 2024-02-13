@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ToDoListBooster.BizLogicLayer.AccountService;
 using ToDoListBooster.BizLogicLayer.TaskListService;
 using ToDoListBooster.Core;
@@ -8,64 +11,49 @@ namespace ToDoListBooster.WebApi.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class TaskListController : ControllerBase
     {
-        private readonly ITaskListService _service;
-        public TaskListController(ITaskListService service)
+        private readonly IMediator _mediator;
+        public TaskListController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateTaskListCommand command)
+        {
+            command.UserId = CurrentUserId();
+            var taskListId = await _mediator.Send(command);
+            return Ok(taskListId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateTaskListCommand command)
+        {
+            var taskListId = await _mediator.Send(command);
+            return Ok(taskListId);
         }
 
         [HttpGet]
-        public IActionResult GetAll([FromBody] SortFilterDto dto)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllTaskListQuery command)
         {
-            if (ModelState.IsValid)
-            {
-                var result = _service.GetAll(dto);
-
-                if (_service.IsValid)
-                    return Ok(result);
-            }
-            return ValidationProblem(ModelState);
+            var taskLists = await _mediator.Send(command);
+            return Ok(taskLists);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateTaskListDto dto)
+        public async Task<IActionResult> Delete(DeleteTaskListCommand command)
         {
-            if (ModelState.IsValid)
-            {
-                _service.Create(dto);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
+            var taskListId = await _mediator.Send(command);
+            return Ok(taskListId);
         }
 
-        [HttpPost]
-        public IActionResult Update([FromBody] UpdateTaskListDto dto)
+        private int CurrentUserId()
         {
-            if (ModelState.IsValid)
-            {
-                _service.Update(dto);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
-        }
-
-        [HttpPost("{id}")]
-        public IActionResult Delete(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.Delete(id);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
+            var currentUser = HttpContext.User;
+            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return Convert.ToInt32(userId);
         }
     }
 }

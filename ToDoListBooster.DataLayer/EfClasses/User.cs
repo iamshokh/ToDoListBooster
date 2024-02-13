@@ -7,11 +7,9 @@ namespace ToDoListBooster.DataLayer.EfClasses
     [Table("sys_user")]
     public partial class User
     {
-        public User(string? password)
+        public User()
         {
             TaskLists = new HashSet<TaskList>();
-            if(!string.IsNullOrEmpty(password))
-                SetPassword(password);
         }
 
         [Key]
@@ -30,7 +28,7 @@ namespace ToDoListBooster.DataLayer.EfClasses
         [StringLength(250)]
         public string Email { get; set; } = null!;
         [Column("created_date", TypeName = "timestamp without time zone")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [InverseProperty(nameof(TaskList.User))]
         public virtual ICollection<TaskList> TaskLists { get; set; }

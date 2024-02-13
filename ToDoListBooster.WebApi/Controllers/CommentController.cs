@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToDoListBooster.BizLogicLayer.ComentService;
 using ToDoListBooster.BizLogicLayer.TaskListService;
@@ -8,64 +10,41 @@ namespace ToDoListBooster.WebApi.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class CommentController : ControllerBase
     {
-        private readonly ICommentService _service;
-        public CommentController(ICommentService service)
+        private readonly IMediator _mediator;
+        public CommentController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCommentCommand command)
+        {
+            var commentId = await _mediator.Send(command);
+            return Ok(commentId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateCommentCommand command)
+        {
+            var commentId = await _mediator.Send(command);
+            return Ok(commentId);
         }
 
         [HttpGet]
-        public IActionResult GetAll([FromBody] SortFilterDto dto)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllCommentQuery command)
         {
-            if (ModelState.IsValid)
-            {
-                var result = _service.GetAll(dto);
-
-                if (_service.IsValid)
-                    return Ok(result);
-            }
-            return ValidationProblem(ModelState);
+            var comments = await _mediator.Send(command);
+            return Ok(comments);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateCommentDto dto)
+        public async Task<IActionResult> Delete(DeleteCommentCommand command)
         {
-            if (ModelState.IsValid)
-            {
-                _service.Create(dto);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
-        }
-
-        [HttpPost]
-        public IActionResult Update([FromBody] UpdateCommentDto dto)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.Update(dto);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
-        }
-
-        [HttpPost("{id}")]
-        public IActionResult Delete(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.Delete(id);
-
-                if (_service.IsValid)
-                    return Ok();
-            }
-            return ValidationProblem(ModelState);
+            var commentId = await _mediator.Send(command);
+            return Ok(commentId);
         }
     }
 }

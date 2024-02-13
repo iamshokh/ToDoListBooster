@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 using ToDoListBooster.WebApi;
 using ToDoListBooster.WebApi.Extensions;
 
@@ -14,6 +16,22 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+//builder.Services.AddControllersWithViews()
+//                    .AddJsonOptions(options =>
+//                    {
+//                        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+//                        options.JsonSerializerOptions.WriteIndented = true;
+//                        options.JsonSerializerOptions.IgnoreReadOnlyFields = true;
+//                        options.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
+//                    });
+
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 builder.Services.ConfigureDbServices();
 builder.Services.ConfigureSwaggerServices();
@@ -56,6 +74,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 c.SwaggerDoc("v1",
                              new OpenApiInfo
                              {
-                                 Title = "E_Wallet.WebApi",
+                                 Title = "ToDoList.WebApi",
                                  Version = "v1"
                              });
 
